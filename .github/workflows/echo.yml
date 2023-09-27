@@ -20,6 +20,8 @@ jobs:
 
       - id: echo
         run: |
+          diff=$(git diff main)
+          echo $diff
           test=hello
           echo "test=$test" >> $GITHUB_OUTPUT
   slack:
