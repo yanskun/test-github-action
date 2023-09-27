@@ -21,7 +21,8 @@ jobs:
       - id: echo
         run: |
           {
-            echo $(git diff origin/main)
+            echo 'JSON_RESPONSE<<EOF'
+            curl https://example.com
             echo EOF
           } >> $GITHUB_OUTPUT
   slack:
