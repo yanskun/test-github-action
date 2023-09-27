@@ -8,19 +8,26 @@ jobs:
     name: echo
     runs-on: ubuntu-latest
     steps:
-      - name: Send GitHub Action trigger data to Slack workflow
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Get diff
+        id: get_diff
+        run: |
+          git diff main
+
+      - name: Send custom JSON data to Slack workflow
         id: slack
-        uses: slackapi/slack-github-action@v1.16.0
+        uses: slackapi/slack-github-action@v1.24.0
         with:
           payload: |
             {
-              "text": "hoge",
               "blocks": [
                 {
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "fuga"
+                    "text": "テストでーす"
                   }
                 },
                 {
@@ -28,7 +35,7 @@ jobs:
                   "elements": [
                     {
                       "type": "mrkdwn",
-                      "text": "## piyo"
+                      "text": ":test: Diff: ${{steps.get_diff.outputs.body}}"
                     }
                   ]
                 }
