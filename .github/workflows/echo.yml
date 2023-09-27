@@ -19,6 +19,7 @@ jobs:
       - id: get_diff
         name: Get diff
         run: |
+          git fetch
           diff=$(git diff main)
           echo "body=$diff >> $GITHUB_OUTPUT"
 
