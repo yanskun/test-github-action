@@ -7,33 +7,51 @@ on:
   workflow_dispatch:
 
 jobs:
-  git:
-    name: Git
+  job1:
     runs-on: ubuntu-latest
+    # Map a step output to a job output
     outputs:
-      diff: ${{ steps.git_diff.outputs.diff }}
+      output1: ${{ steps.step1.outputs.test }}
+      output2: ${{ steps.step2.outputs.test }}
     steps:
-      - name: Check out code
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-
-      - id: get_diff
-        name: Get diff
-        run: |
-          # echo "DIFF=$(git diff origin/main)"
-          # echo "diff=${DIFF}" >> $GITHUB_OUTPUT
-          echo "diff=hello" >> $GITHUB_OUTPUT
-
-  slack:
-    name: Send Slack
+    - id: step1
+      run: echo "test=hello" >> $GITHUB_OUTPUT 
+    - id: step2
+      run: echo "test=world" >> $GITHUB_OUTPUT 
+  job2:
     runs-on: ubuntu-latest
-    needs: git
-    # env:
-    #   DIFF: ${{ needs.git.outputs.diff }}
+    needs: job1
     steps:
-      - name: echo
-        run: echo hoge ${{needs.git.outputs.diff}}
+    - run: echo ${{needs.job1.outputs.output1}} ${{needs.job1.outputs.output2}}
+
+# jobs:
+#   git:
+#     name: Git
+#     runs-on: ubuntu-latest
+#     outputs:
+#       diff: ${{ steps.git_diff.outputs.diff }}
+#     steps:
+#       - name: Check out code
+#         uses: actions/checkout@v3
+#         with:
+#           fetch-depth: 0
+#
+#       - id: get_diff
+#         name: Get diff
+#         run: |
+#           # echo "DIFF=$(git diff origin/main)"
+#           # echo "diff=${DIFF}" >> $GITHUB_OUTPUT
+#           echo "diff=hello" >> $GITHUB_OUTPUT
+#
+#   slack:
+#     name: Send Slack
+#     runs-on: ubuntu-latest
+#     needs: git
+#     # env:
+#     #   DIFF: ${{ needs.git.outputs.diff }}
+#     steps:
+#       - name: echo
+#         run: echo hoge ${{needs.git.outputs.diff}}
       # - name: Send custom JSON data to Slack workflow
       #   id: slack
       #   uses: slackapi/slack-github-action@v1.24.0
