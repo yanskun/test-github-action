@@ -50,7 +50,7 @@ jobs:
                   "elements": [
                     {
                       "type": "mrkdwn",
-                      "text": ":diff: \n ```${{ needs.git.outputs.diff }}```"
+                      "text": ":diff: \n ```${{DIFF}}```"
                     }
                   ]
                 }
