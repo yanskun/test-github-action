@@ -14,18 +14,15 @@ jobs:
       diff: ${{ steps.git_diff.outputs.diff }}
     steps:
       - name: Check out code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
       - id: get_diff
         name: Get diff
         run: |
-          git config --global user.email "actions@github.com"
-          git config --global user.name "GitHub Actions"
-          git branch -a
-          diff=$(git diff origin/main)
-          echo "diff=${diff}" >> $GITHUB_OUTPUT
+          echo "DIFF=$(git diff origin/main)"
+          echo "diff=${DIFF}" >> $GITHUB_OUTPUT
 
   slack:
     name: Send Slack
