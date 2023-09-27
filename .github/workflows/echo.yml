@@ -14,6 +14,9 @@ jobs:
       - name: Get diff
         id: get_diff
         run: |
+          git --version
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
           git diff main
 
       - name: Send custom JSON data to Slack workflow
