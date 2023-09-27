@@ -27,12 +27,17 @@ jobs:
           MY_STRING="${MY_STRING//'%'/'%25'}"
           MY_STRING="${MY_STRING//$'\n'/'%0A'}"
           MY_STRING="${MY_STRING//$'\r'/'%0D'}"
-          echo "diff=$MY_STRING" >> $GITHUB_OUTPUT
-  slack:
-    runs-on: ubuntu-latest
-    needs: git
-    steps:
-    - run: echo ${{needs.git.outputs.diff}}
+          # echo "diff=$MY_STRING" >> $GITHUB_OUTPUT
+          echo "::set-output name=content::$MY_STRING"
+      - name: display string
+        run: |
+          echo "The string is: ${{ steps.my_string.outputs.content }}"
+
+  # slack:
+  #   runs-on: ubuntu-latest
+  #   needs: git
+  #   steps:
+  #   - run: echo ${{needs.git.outputs.diff}}
 
 # jobs:
 #   git:
