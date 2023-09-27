@@ -7,9 +7,11 @@ on:
   workflow_dispatch:
 
 jobs:
-  echo:
-    name: echo
+  git:
+    name: Git
     runs-on: ubuntu-latest
+    outputs:
+      diff: ${{ steps.git_diff.outputs.diff }}
     steps:
       - name: Check out code
         uses: actions/checkout@v4
@@ -23,8 +25,15 @@ jobs:
           git config --global user.name "GitHub Actions"
           git branch -a
           diff=$(git diff origin/main)
-          echo "body=$diff >> $GITHUB_OUTPUT"
+          echo "body=${diff} >> $GITHUB_OUTPUT"
 
+  slack:
+    name: Send Slack
+    runs-on: ubuntu-latest
+    needs: [git]
+    env:
+      DIFF: ${{ needs.git.outputs.diff }}
+    steps:
       - name: Send custom JSON data to Slack workflow
         id: slack
         uses: slackapi/slack-github-action@v1.24.0
@@ -44,7 +53,7 @@ jobs:
                   "elements": [
                     {
                       "type": "mrkdwn",
-                      "text": ":diff: \n ```${{ steps.get_diff.outputs.body  }}```"
+                      "text": ":diff: \n ```${{DIFF}}```"
                     }
                   ]
                 }
