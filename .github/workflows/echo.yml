@@ -20,9 +20,10 @@ jobs:
 
       - id: echo
         run: |
-          test=$(git diff origin/main)
-          echo "test=$test" >> $GITHUB_OUTPUT
-          echo 'EOF' >> $GITHUB_OUTPUT
+          {
+            echo $(git diff origin/main)
+            echo EOF
+          } >> $GITHUB_OUTPUT
   slack:
     runs-on: ubuntu-latest
     needs: git
