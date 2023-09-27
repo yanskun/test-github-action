@@ -1,6 +1,9 @@
 name: Echo
 
 on:
+  push:
+    branches:
+      - chore/echo
   workflow_dispatch:
 
 jobs:
@@ -14,6 +17,7 @@ jobs:
       - name: Get diff
         id: get_diff
         run: |
+          git fetch
           git diff origin/main head
 
       - name: Send custom JSON data to Slack workflow
