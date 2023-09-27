@@ -16,8 +16,8 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Get diff
-        id: get_diff
+      - id: get_diff
+        name: Get diff
         run: |
           echo $(git diff main)
 
@@ -40,7 +40,7 @@ jobs:
                   "elements": [
                     {
                       "type": "mrkdwn",
-                      "text": ":test: Diff: ${{steps.get_diff.outputs.body}}"
+                      "text": ":diff: \n ```${{ steps.get_diff.outputs.body  }}```"
                     }
                   ]
                 }
