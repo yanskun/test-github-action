@@ -20,12 +20,15 @@ jobs:
 
       - id: echo
         run: |
-          {
-            echo 'JSON_RESPONSE<<EOF'
-            curl https://example.com
-            echo EOF
-          } >> $GITHUB_ENV
-          echo "{name}={diff}" >> $GITHUB_OUTPUT
+          MY_STRING=$(cat << EOF
+          git diff origin/main
+          EOF
+          )
+          MY_STRING="${MY_STRING//'%'/'%25'}"
+          MY_STRING="${MY_STRING//$'\n'/'%0A'}"
+          MY_STRING="${MY_STRING//$'\r'/'%0D'}"
+          echo "::set-output name=content::$MY_STRING"
+          echo "r=$MY_STRING" >> $GITHUB_OUTPUT
   slack:
     runs-on: ubuntu-latest
     needs: git
