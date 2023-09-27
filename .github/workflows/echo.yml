@@ -28,7 +28,7 @@ jobs:
   slack:
     name: Send Slack
     runs-on: ubuntu-latest
-    needs: [git]
+    needs: git
     # env:
     #   DIFF: ${{ needs.git.outputs.diff }}
     steps:
