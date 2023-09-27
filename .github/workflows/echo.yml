@@ -20,7 +20,7 @@ jobs:
 
       - id: echo
         run: |
-          diff=$(git diff main)
+          diff=$(git diff origin/main)
           echo $diff
           test=hello
           echo "test=$test" >> $GITHUB_OUTPUT
