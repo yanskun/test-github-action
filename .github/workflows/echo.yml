@@ -24,7 +24,8 @@ jobs:
             echo 'JSON_RESPONSE<<EOF'
             curl https://example.com
             echo EOF
-          } >> $GITHUB_OUTPUT
+          } >> $GITHUB_ENV
+          echo "{name}={diff}" >> $GITHUB_OUTPUT
   slack:
     runs-on: ubuntu-latest
     needs: git
