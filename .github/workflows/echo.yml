@@ -21,8 +21,9 @@ jobs:
       - id: get_diff
         name: Get diff
         run: |
-          echo "DIFF=$(git diff origin/main)"
-          echo "diff=${DIFF}" >> $GITHUB_OUTPUT
+          # echo "DIFF=$(git diff origin/main)"
+          # echo "diff=${DIFF}" >> $GITHUB_OUTPUT
+          echo "diff=hello" >> $GITHUB_OUTPUT
 
   slack:
     name: Send Slack
@@ -32,32 +33,32 @@ jobs:
       DIFF: ${{ needs.git.outputs.diff }}
     steps:
       - name: echo
-        run: echo $DIFF
-      - name: Send custom JSON data to Slack workflow
-        id: slack
-        uses: slackapi/slack-github-action@v1.24.0
-        with:
-          payload: |
-            {
-              "blocks": [
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "なんで動かないのかわからない"
-                  }
-                },
-                {
-                  "type": "context",
-                  "elements": [
-                    {
-                      "type": "mrkdwn",
-                      "text": ":diff: \n ```${DIFF}```"
-                    }
-                  ]
-                }
-              ]
-            }
-        env:
-          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: echo ${{needs.git.outputs.diff}}
+      # - name: Send custom JSON data to Slack workflow
+      #   id: slack
+      #   uses: slackapi/slack-github-action@v1.24.0
+      #   with:
+      #     payload: |
+      #       {
+      #         "blocks": [
+      #           {
+      #             "type": "section",
+      #             "text": {
+      #               "type": "mrkdwn",
+      #               "text": "なんで動かないのかわからない"
+      #             }
+      #           },
+      #           {
+      #             "type": "context",
+      #             "elements": [
+      #               {
+      #                 "type": "mrkdwn",
+      #                 "text": ":diff: \n ```${DIFF}```"
+      #               }
+      #             ]
+      #           }
+      #         ]
+      #       }
+      #   env:
+      #     SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+      #     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
