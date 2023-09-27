@@ -13,12 +13,13 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Get diff
         id: get_diff
         run: |
-          git fetch
-          git branch
+          echo ${git diff main}
 
       - name: Send custom JSON data to Slack workflow
         id: slack
