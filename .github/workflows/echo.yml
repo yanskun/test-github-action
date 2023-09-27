@@ -33,7 +33,7 @@ jobs:
     #   DIFF: ${{ needs.git.outputs.diff }}
     steps:
       - name: echo
-        run: echo ${{needs.git.outputs.diff}}
+        run: echo hoge ${{needs.git.outputs.diff}}
       # - name: Send custom JSON data to Slack workflow
       #   id: slack
       #   uses: slackapi/slack-github-action@v1.24.0
