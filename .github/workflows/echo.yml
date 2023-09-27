@@ -17,6 +17,7 @@ jobs:
           git --version
           git config user.name "GitHub Actions Bot"
           git config user.email "<>"
+          git fetch
           git diff main
 
       - name: Send custom JSON data to Slack workflow
