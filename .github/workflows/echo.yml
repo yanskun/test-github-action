@@ -18,7 +18,7 @@ jobs:
         id: get_diff
         run: |
           git fetch
-          git diff origin/main head
+          git branch
 
       - name: Send custom JSON data to Slack workflow
         id: slack
