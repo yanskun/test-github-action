@@ -13,6 +13,11 @@ jobs:
     outputs:
       diff: ${{ steps.echo.outputs.test }}
     steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
       - id: echo
         run: |
           test=hello
