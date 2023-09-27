@@ -19,7 +19,8 @@ jobs:
       - id: get_diff
         name: Get diff
         run: |
-          echo "::set-output name=body::$(git diff main)"
+          diff=$(git diff main)
+          echo "body=$diff >> $GITHUB_OUTPUT"
 
       - name: Send custom JSON data to Slack workflow
         id: slack
