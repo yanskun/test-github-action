@@ -13,10 +13,10 @@ jobs:
     outputs:
       diff: ${{ steps.echo.outputs.test }}
     steps:
-    - id: echo
-      run: |
-        test=hello
-        echo "test=$test" >> $GITHUB_OUTPUT 
+      - id: echo
+        run: |
+          test=hello
+          echo "test=$test" >> $GITHUB_OUTPUT
   slack:
     runs-on: ubuntu-latest
     needs: git
