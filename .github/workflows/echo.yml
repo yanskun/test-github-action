@@ -25,7 +25,7 @@ jobs:
           git config --global user.name "GitHub Actions"
           git branch -a
           diff=$(git diff origin/main)
-          echo "body=${diff} >> $GITHUB_OUTPUT"
+          echo "body=${diff}" >> $GITHUB_OUTPUT
 
   slack:
     name: Send Slack
