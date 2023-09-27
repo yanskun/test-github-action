@@ -15,7 +15,8 @@ jobs:
     steps:
     - id: echo
       run: |
-        echo "test=hello" >> $GITHUB_OUTPUT 
+        test=hello
+        echo "test=$test" >> $GITHUB_OUTPUT 
   slack:
     runs-on: ubuntu-latest
     needs: git
