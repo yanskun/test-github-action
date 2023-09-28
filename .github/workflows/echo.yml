@@ -46,7 +46,7 @@ jobs:
           path: diff
       - name: bash
         run: |
-          ls .
+          ls diff
   #   runs-on: ubuntu-latest
   #   needs: git
   #   steps:
