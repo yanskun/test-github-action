@@ -15,7 +15,9 @@ jobs:
     steps:
       - name: Set the value in bash
         id: step_one
-        run: test=$(ls) && test2=$(pwd) && echo $test $test2
+        run: |
+          echo $(ls)
+          echo $(pwd)
   #   runs-on: ubuntu-latest
   #   needs: git
   #   steps:
