@@ -46,7 +46,7 @@ jobs:
           path: diff
       - name: bash
         run: |
-          cat diff
+          cat diff/test.diff
   #   runs-on: ubuntu-latest
   #   needs: git
   #   steps:
