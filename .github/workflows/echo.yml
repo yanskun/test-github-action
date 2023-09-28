@@ -22,8 +22,30 @@ jobs:
         id: step_one
         run: |
           diff=$(git diff)
-          echo $diff >> test.diff
-          cat test.diff
+          echo $diff >> diff/test.diff
+
+      - name: Archive Artifact 📮
+        uses: actions/upload-artifact@master
+        with:
+          name: diff
+          path: diff
+
+  deploy:
+    name: Deploy
+    needs: generate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎
+        uses: actions/checkout@master
+
+      - name: Download Artifact 📬
+        uses: actions/download-artifact@master
+        with:
+          name: diff
+          path: diff
+      - name: bash
+        run: |
+          ls .
   #   runs-on: ubuntu-latest
   #   needs: git
   #   steps:
