@@ -19,7 +19,7 @@ jobs:
         id: step_one
         run: |
           mkdir diff
-          result=$(git diff origin/main) && echo $result >> diff/test.diff
+          git diff origin/main >> diff/test.diff
 
       - name: Archive Artifact 📮
         uses: actions/upload-artifact@master
@@ -40,9 +40,9 @@ jobs:
         with:
           name: diff
           path: diff
-      - name: Upload to slack step
-        uses: adrey/slack-file-upload-action@master
-        with:
-          token: ${{ secrets.SLACK_TOKEN }}
-          path: diff/test.diff
-          channel: room-yanskun
+      # - name: Upload to slack step
+      #   uses: adrey/slack-file-upload-action@master
+      #   with:
+      #     token: ${{ secrets.SLACK_TOKEN }}
+      #     path: diff/test.diff
+          # channel: room-yanskun
