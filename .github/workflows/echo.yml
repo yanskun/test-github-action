@@ -27,8 +27,8 @@ jobs:
           name: diff
           path: diff
 
-  deploy:
-    name: Deploy
+  slack:
+    name: Send Slack
     needs: git
     runs-on: ubuntu-latest
     steps:
@@ -40,9 +40,9 @@ jobs:
         with:
           name: diff
           path: diff
-      # - name: Upload to slack step
-      #   uses: adrey/slack-file-upload-action@master
-      #   with:
-      #     token: ${{ secrets.SLACK_TOKEN }}
-      #     path: diff/test.diff
-          # channel: room-yanskun
+      - name: Upload to slack step
+        uses: adrey/slack-file-upload-action@master
+        with:
+          token: ${{ secrets.SLACK_TOKEN }}
+          path: diff/test.diff
+          channel: room-yanskun
