@@ -20,18 +20,12 @@ jobs:
 
       - id: echo
         run: |
-          MY_STRING=$(cat << EOF
-          git diff origin/main
-          EOF
-          )
-          MY_STRING="${MY_STRING//'%'/'%25'}"
-          MY_STRING="${MY_STRING//$'\n'/'%0A'}"
-          MY_STRING="${MY_STRING//$'\r'/'%0D'}"
-          # echo "diff=$MY_STRING" >> $GITHUB_OUTPUT
-          echo "::set-output name=content::$MY_STRING"
+          echo 'JSON_RESPONSE<<EOF' >> $GITHUB_OUTPUT
+          curl https://example.lab >> $GITHUB_OUTPUT
+          echo 'EOF' >> $GITHUB_OUTPUT
       - name: display string
         run: |
-          echo "The string is: ${{ steps.my_string.outputs.content }}"
+          echo "The string is: ${{ steps.echo.outputs.report }}"
 
   # slack:
   #   runs-on: ubuntu-latest
