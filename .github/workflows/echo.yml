@@ -43,9 +43,12 @@ jobs:
         with:
           name: diff
           path: diff
-      - name: bash
-        run: |
-          cat diff/test.diff
+      - name: Upload to slack step
+        uses: adrey/slack-file-upload-action@master
+        with:
+          token: ${{ secrets.SLACK_TOKEN }}
+          path: diff/test.diff
+          channel: room-yanskun
   #   runs-on: ubuntu-latest
   #   needs: git
   #   steps:
