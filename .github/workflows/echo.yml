@@ -21,6 +21,7 @@ jobs:
       - name: Set the value in bash
         id: step_one
         run: |
+          mkdir diff
           diff=$(git diff)
           echo $diff >> diff/test.diff
 
