@@ -13,21 +13,10 @@ jobs:
     outputs:
       diff: ${{ steps.echo.outputs.test }}
     steps:
-      - name: Check out code
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-
-      - id: echo
+      - name: Set the value in bash
+        id: step_one
         run: |
-          echo 'JSON_RESPONSE<<EOF' >> $GITHUB_OUTPUT
-          curl https://example.lab >> $GITHUB_OUTPUT
-          echo 'EOF' >> $GITHUB_OUTPUT
-      - name: display string
-        run: |
-          echo "The string is: ${{ steps.echo.outputs.report }}"
-
-  # slack:
+          pwd
   #   runs-on: ubuntu-latest
   #   needs: git
   #   steps:
