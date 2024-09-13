@@ -42,4 +42,4 @@ jobs:
         with:
           token: ${{ secrets.SLACK_TOKEN }}
           path: result/diff.diff
-          channel: development
+          channel: develop
