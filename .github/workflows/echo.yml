@@ -38,7 +38,7 @@ jobs:
           name: result
           path: result
       - name: Upload to slack step
-        uses: yanskun/slack-file-upload@v1
+        uses: yanskun/slack-file-upload@main
         with:
           token: ${{ secrets.SLACK_TOKEN }}
           path: result/diff.diff
