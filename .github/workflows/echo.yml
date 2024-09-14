@@ -38,8 +38,8 @@ jobs:
           name: result
           path: result
       - name: Upload to slack step
-        uses: adrey/slack-file-upload-action@master
+        uses: yanskun/slack-file-upload@master
         with:
           token: ${{ secrets.SLACK_TOKEN }}
           path: result/diff.diff
-          channel: develop
+          channel_id: CV2RB3ZDJ
