@@ -30,3 +30,8 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+
+      - name: Run Composite Action
+        uses: "./.github/actions/test"
+        with:
+          test-name: "Composite Actions Test"
