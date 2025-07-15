@@ -6,6 +6,9 @@ inputs:
     description: test
     required: true
 
+env:
+  test-token: "test-token"
+
 runs:
   using: composite
 
@@ -13,3 +16,7 @@ runs:
     - name: Composite Action
       shell: bash
       run: echo Hello, ${{ inputs.test-name }}
+
+    - name: Composite Action ENV
+      shell: bash
+      run: echo Hello, ${{ env.test-token }}
